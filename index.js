@@ -22,7 +22,7 @@ function getUserSpecs() {
         {
             type: 'input',
             name: 'textColor',
-            message: colors.green('\n\n-----Please enter the color you want these characters to be. You may do so by simply entering a common color name. Or, if you have a particular hue in mind and you know the 6-digit hexadecimal identifier (0-9, A-F), you may enter that 6-digit hexidecimal to identify your chosen color.-----'),
+            message: colors.green('\n\n-----Please enter the color you want these characters to be. You may do so by simply entering a common color name. Or, if you have a particular hue in mind and you know the 6-digit hexadecimal identifier (0-9, A-F), you may enter that 6-digit hexidecimal, BEGINNING WITH # (e.g., #111FFF) to identify your chosen color.-----'),
         },
         {
             type: 'list',
@@ -33,7 +33,7 @@ function getUserSpecs() {
         {
             type: 'input',
             name: 'shapeColor',
-            message: colors.green('\n\n-----Please enter the color of your logo. Again, you may do so by common color name or by 6-digit hexadecimal.-----'),
+            message: colors.green('\n\n-----Please enter the color of your logo. Again, you may do so by common color name or by 6-digit hexadecimal beginning with #.-----'),
         },
         {
             type: 'input',

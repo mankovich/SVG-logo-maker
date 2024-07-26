@@ -2,7 +2,7 @@
 const fs = require('fs')
 const inquirer = require('inquirer')
 const validator = require('validator')
-const { Circle, Rectangle, Triangle, Logo } = require('./lib/shapes.js')
+const {Circle, Rectangle, Triangle, Logo} = require('./lib/shapes.js')
 const colors = require('colors')
 
 function getUserSpecs() {
@@ -10,8 +10,7 @@ function getUserSpecs() {
         {
             type: 'input',
             name: 'characters',
-            message: colors.emeraldGreen("\n\nPlease enter **up to 3** characters around which you would like to build your logo."),
-            name: 'characters',
+            message: colors.green("\n\nPlease enter **up to 3** characters around which you would like to build your logo."),
             validator: (input) => {
                 const maxChars = 3;
                 if (input.length > maxChars) {
@@ -22,29 +21,29 @@ function getUserSpecs() {
         },
         {
             type: 'input',
-            name: 'characterColor',
-            message: colors.emeraldGreen('\n\nPlease enter the color you want these characters to be. You may do so by simply entering a common color name. Or, if you have a particular hue in mind and you know the 6-digit hexadecimal identifier (0-9, A-F), you may enter that 6-digit hexidecimal to identify your chosen color.'),
+            name: 'textColor',
+            message: colors.green('\n\nPlease enter the color you want these characters to be. You may do so by simply entering a common color name. Or, if you have a particular hue in mind and you know the 6-digit hexadecimal identifier (0-9, A-F), you may enter that 6-digit hexidecimal to identify your chosen color.'),
         },
         {
             type: 'list',
             name: 'shape',
-            message: colors.emeraldGreen('\n\nPlease choose the shape of your logo.'),
+            message: colors.green('\n\nPlease choose the shape of your logo.'),
             choices: [Circle, Triangle, Rectangle],
         },
         {
             type: 'input',
             name: 'shapeColor',
-            message: colors.emeraldGreen('\n\nPlease enter the color of your logo. Again, you may do so by common color name or by 6-digit hexadecimal.'),
+            message: colors.green('\n\nPlease enter the color of your logo. Again, you may do so by common color name or by 6-digit hexadecimal.'),
         },
         {
             type: 'input',
             name: 'fileName',
-            message: colors.emeraldGreen("\n\nWhat name would you like for your logo's .svg file?"),
+            message: colors.green("\n\nWhat name would you like for your logo's .svg file?"),
             validator: (input) => {
                 const files = fs.readdirSync('./examples/');
                 for (i = 0; i < files.length; i++) {
                     if (files[i] === `${input}.svg`) {
-                        return colors.emeraldGreen('\n\n Oops. That name is already taken. Please choose another name for your .svg file.');
+                        return colors.green('\n\n Oops. That name is already taken. Please choose another name for your .svg file.');
                     } 
                     return true;
                 }
@@ -65,9 +64,12 @@ function getUserSpecs() {
                 shape = new Circle();
                 break;
         }
-        shape.addColor(answers.shapeColor);
-        const logo = new Logo(shape, answers.characters, answers.characterColor);
-        fs.writeFileSync('./examples/' + answers.fileName + '.svg', svg.render());
+        shape.addColor(answers.shapeColor, answers.textColor);
+
+        const logo = new Logo(shape, answers.characters, answers.textColor);
+
+        fs.writeFileSync('./examples/' + answers.fileName + '.svg', logo.render());
+        
         console.log(`Generated ${answers.fileName}.svg and saved in /examples.`)
     })
 }

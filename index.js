@@ -10,11 +10,11 @@ function getUserSpecs() {
         {
             type: 'input',
             name: 'characters',
-            message: colors.green("\n\nPlease enter **up to 3** characters around which you would like to build your logo."),
+            message: colors.green("\n\n-----Please enter **up to 3** characters around which you would like to build your logo.-----"),
             validator: (input) => {
                 const maxChars = 3;
                 if (input.length > maxChars) {
-                    return colors.indigo(colors.bgGold("\n\nYou entered too many characters: 3 is **the most** you make choose to use. Please try again."));
+                    return colors.indigo(colors.bgGold("\n\n-----You entered too many characters: 3 is **the most** you make choose to use. Please try again.-----"));
                 }
                 return true;
             },
@@ -22,28 +22,28 @@ function getUserSpecs() {
         {
             type: 'input',
             name: 'textColor',
-            message: colors.green('\n\nPlease enter the color you want these characters to be. You may do so by simply entering a common color name. Or, if you have a particular hue in mind and you know the 6-digit hexadecimal identifier (0-9, A-F), you may enter that 6-digit hexidecimal to identify your chosen color.'),
+            message: colors.green('\n\n-----Please enter the color you want these characters to be. You may do so by simply entering a common color name. Or, if you have a particular hue in mind and you know the 6-digit hexadecimal identifier (0-9, A-F), you may enter that 6-digit hexidecimal to identify your chosen color.-----'),
         },
         {
             type: 'list',
             name: 'shape',
-            message: colors.green('\n\nPlease choose the shape of your logo.'),
+            message: colors.green('\n\n-----Please choose the shape of your logo.-----'),
             choices: [Circle, Triangle, Rectangle],
         },
         {
             type: 'input',
             name: 'shapeColor',
-            message: colors.green('\n\nPlease enter the color of your logo. Again, you may do so by common color name or by 6-digit hexadecimal.'),
+            message: colors.green('\n\n-----Please enter the color of your logo. Again, you may do so by common color name or by 6-digit hexadecimal.-----'),
         },
         {
             type: 'input',
             name: 'fileName',
-            message: colors.green("\n\nWhat name would you like for your logo's .svg file?"),
+            message: colors.green("\n\n-----What name would you like for your logo's .svg file?-----"),
             validator: (input) => {
                 const files = fs.readdirSync('./examples/');
                 for (i = 0; i < files.length; i++) {
                     if (files[i] === `${input}.svg`) {
-                        return colors.green('\n\n Oops. That name is already taken. Please choose another name for your .svg file.');
+                        return colors.green('\n\n -----Oops. That name is already taken. Please choose another name for your .svg file.-----');
                     } 
                     return true;
                 }
@@ -70,7 +70,7 @@ function getUserSpecs() {
 
         fs.writeFileSync('./examples/' + answers.fileName + '.svg', logo.render());
         
-        console.log(`Generated ${answers.fileName}.svg and saved in /examples.`)
+        console.log(`\n\n------Generated ${answers.fileName}.svg and saved in /examples.------`)
     })
 }
 

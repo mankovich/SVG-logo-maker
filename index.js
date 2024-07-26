@@ -2,7 +2,7 @@
 const fs = require('fs')
 const inquirer = require('inquirer')
 const validator = require('validator')
-const { Circle, Rectangle, Triangle, Shape } = require('./lib/shapes.js')
+const { Circle, Rectangle, Triangle, Logo } = require('./lib/shapes.js')
 const colors = require('colors')
 
 function getUserSpecs() {
@@ -66,7 +66,7 @@ function getUserSpecs() {
                 break;
         }
         shape.addColor(answers.shapeColor);
-        const logo = new Shape(shape, answers.characters, answers.characterColor);
+        const logo = new Logo(shape, answers.characters, answers.characterColor);
         fs.writeFileSync('./examples/' + answers.fileName + '.svg', svg.render());
         console.log(`Generated ${answers.fileName}.svg and saved in /examples.`)
     })
